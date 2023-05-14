@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/common :: head('Hotel Booking System')"></head>
+<body>
+	<div class="py-5 bg-dark text-center text-light">Header</div>
+	<a th:href="@{/login}" th:if="${Auth == null}">Login</a>
+		
+	<div class="my-5 py-5"></div>
+	
+</body>
+</html>

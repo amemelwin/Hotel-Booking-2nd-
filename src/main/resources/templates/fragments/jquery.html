@@ -3,7 +3,6 @@
 
 <script th:fragment="jquery">
 	$(document).ready(function(){
-		//th:room-id="*{id}" th:lend-flag="*{lendFlag}" th:room-number="*{roomNumber}"
 		$(".room").click(function(){
 			const attr = selector($(this));
 			const roomId = attr("room-id");
@@ -14,13 +13,14 @@
 				const inputElement = selector($("input[name='roomId']"));
 				const oldSelectedId = inputElement().val();
 				let childDiv = selector($(`div[room-id=${roomId}] > div`));
-				
+				const createBookingBtn = selector( $("#createBookingBtn") );
 				// Has old selected
 				if(oldSelectedId){
 					// Toggle 
 					if(oldSelectedId == roomId){
 						childDiv("css","background-color","white");
 						inputElement().val("");
+						createBookingBtn("disabled",true);
 					}else{
 						// Release selected old room
 						let oldRoomElement = selector($(`div[room-id=${oldSelectedId}] > div`));
@@ -29,18 +29,17 @@
 						// Select New Room
 						childDiv("css","background-color","#09E745");
 						inputElement().val(roomId);
-						
 					}
-					
 				}else{
 					childDiv("css","background-color","#09E745");
 					inputElement().val(roomId);
+					createBookingBtn("disabled",false);
 				}
 				
 			}
 			
 			
-		});				
+		});
 		
 	});
 </script> 	
