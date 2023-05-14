@@ -9,16 +9,29 @@
 			const roomId = attr("room-id");
 			const lendFlag = attr("lend-flag");
 			const roomNumber = attr("room-number");
+			
 			if(lendFlag == 0){
-				let childDiv = $(`div[room-id=${roomId}] > div`);
-				childDiv.css("background-color","#09E705");
+				let childDiv = selector($(`div[room-id=${roomId}] > div`));
+				childDiv("css","background-color","#09E705");
 			}
 		});
 				
 		// 5/14/2023 		
 		const selector = (element)=>{
-			return (prop)=>element.attr(prop);
+			return (...props)=>{
+				if(props.length==1){
+					const [prop] = props;
+					return element.attr(prop);
+				}else if(props.length==2){
+					const [prop,value] = props;
+					element.attr(prop,value);
+				}else if(props.length==3){
+					const [css,style,value] = props;
+					element.css(style,value);
+				}
+			};
 		}
+		
 	});
 </script> 	
 </html>
