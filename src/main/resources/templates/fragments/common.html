@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/x-icon" href="https://cdn.qiita.com/assets/favicons/public/production-c620d3e403342b1022967ba5e3db1aaa.ico">
+    <link rel="apple-touch-icon" type="image/png" href="https://cdn.qiita.com/assets/favicons/public/apple-touch-icon-ec5ba42a24ae923f16825592efdc356f.png">
+    <title th:text="${title}"></title>
+    <link 
+    	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    	rel="stylesheet"
+    />
+    <link 
+    	rel="stylesheet" 
+    	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" 
+    />
+    <script 
+    	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+    >
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.4.slim.min.js"></script>
+</head>
+<body>
+ 	<!-- Header -->
+ 	<div th:fragment="header(title)" class="text-center py-4 bg-dark text-light mb-5" >
+ 		<div th:text="${title}"></div>
+ 	</div>
+ 	
+ 	<!-- Footer -->
+ 	<div th:fragment="footer(left,right)" class="py-3 bg-dark text-light" style="position: fixed; bottom: 0; width: 100%">
+ 		<div class="container d-flex flex-row justify-content-between">
+ 			<div th:text="${left}"></div>
+ 			<div th:text="${right}"></div>
+ 		</div>
+ 	</div>
+</body>
+</html>

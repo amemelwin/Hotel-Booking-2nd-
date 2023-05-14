@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.booking.room.repository.HotelBookingMapper">
+	<resultMap id="roomBookingResult" type="com.booking.room.entity.RoomBooking">
+		<id property="id" column="id"/>
+		<result property="roomNumber" column="room_number"/>
+		<result property="lendFlag" column="lend_flag"/>
+		<result property="userId" column="user_id"/>
+		<result property="bookingId" column="booking_id"/>
+	</resultMap>
+	
+	<select id="getRoomBooking" resultMap="roomBookingResult">
+		SELECT
+		r.id,r.room_number,r.lend_flag,
+		(SELECT bb.user_id FROM booking bb WHERE bb.id = MAX(b.id)),
+		(SELECT bb.id booking_id FROM booking bb WHERE bb.id = MAX(b.id))
+		FROM rooms r
+		LEFT OUTER JOIN booking b
+		ON r.id = b.room_id
+		GROUP BY r.id,r.room_number,r.lend_flag
+		ORDER BY r.id;
+	</select>	
+</mapper>

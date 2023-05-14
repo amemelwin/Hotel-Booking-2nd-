@@ -1,0 +1,51 @@
+-- child table must be remove
+-- before parent table
+-- db name = 'hotel_booking'
+Drop Table If Exists users;
+Drop Table If Exists rooms; 
+Drop Table If Exists booking;
+
+Create Table users (
+	id SERIAL NOT NULL,
+	username varchar(199) NOT NULL,
+	email varchar(199) unique NOT NULL,
+	password text NOT NULL,
+	created_at timestamp Default now(),
+	updated_at timestamp Default now(),
+	PRIMARY KEY(id)
+);
+
+Create Table rooms (
+	id SERIAL NOT NULL,
+	room_number varchar(199) NOT NULL,
+	lend_flag int NOT NULL,
+	created_at timestamp Default now(),
+	updated_at timestamp Default now(),
+	PRIMARY KEY(id)
+);
+
+Create Table booking (
+	id SERIAL NOT NULL,
+	date date,
+	room_id int,
+	user_id int,
+	created_at timestamp Default now(),
+	updated_at timestamp Default now(),
+	deleted_at timestamp Default null,
+	PRIMARY KEY(id)
+);
+
+-- simple data
+INSERT INTO users(username,email,password)
+VALUES
+('aar kar mann aung','mr.arkar@gmail.com','123456'),
+('a mie mie lwin','mrs.amie@gmail.com','123456');
+
+INSERT INTO rooms(room_number,lend_flag)
+VALUES
+('Room 1',1),('Room 2',1),('Room 3',1),('Room 4',0),('Room 5',0),('Room 6',0),
+('Room 7',0),('Room 8',0),('Room 9',0),('Room 10',0),('Room 11',1),('Room 12',0);
+
+INSERT INTO booking(date,room_id,user_id)
+VALUES
+('2023-05-08',1,1),('2023-05-08',2,2),('2023-05-08',3,1),('2023-05-08',11,2);

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/common :: head('Hotel Booking System')"></head>
+<body>
+	<div class="py-5 bg-dark text-center text-light">Header</div>
+	<div class="mx-auto w-50 ">
+		<div class="row">
+			<div th:each="room:${rooms}" th:object="${room}" class="col-3 p-3 room" th:room-id="*{id}" th:lend-flag="*{lendFlag}" th:room-number="*{roomNumber}" >
+				<div 
+					th:text="*{roomNumber}" 
+					class="py-5 text-center border" 
+					style="border-radius:20px; user-select:none;" 
+					th:styleappend="*{lendFlag == 1}?'background-color:#E1E1E1; cursor:not-allowed;':'background-color:white;cursor:pointer;'"
+					>
+				</div>
+			</div>
+		</div>		
+	</div>
+	
+	
+	<script th:replace="fragments/jquery :: jquery"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<script th:fragment="jquery">
+	$(document).ready(function(){
+		//th:room-id="*{id}" th:lend-flag="*{lendFlag}" th:room-number="*{roomNumber}"
+		$(".room").click(function(){
+			const attr = selector($(this));
+			const roomId = attr("room-id");
+			const lendFlag = attr("lend-flag");
+			const roomNumber = attr("room-number");
+			if(lendFlag == 0){
+				let childDiv = $(`div[room-id=${roomId}] > div`);
+				childDiv.css("background-color","#09E705");
+			}
+		});
+				
+		// 5/14/2023 		
+		const selector = (element)=>{
+			return (prop)=>element.attr(prop);
+		}
+	});
+</script> 	
+</html>
