@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<script th:fragment="module">
+	// Name : Selector , 
+	// Author : Aar Kar Mann Aung & Amie
+	// Date : 5/14/2023 	
+	const selector = (element)=>{
+		return (...props)=>{
+			if(props.length==1){
+				const [prop] = props;
+				return element.attr(prop);
+			}else if(props.length==0){
+				return element;
+			}else if(props.length==2){
+				const [prop,value] = props;
+				element.attr(prop,value);
+			}else if(props.length==3){
+				const [css,style,value] = props;
+				element.css(style,value);
+			}
+		};
+	}
+</script> 	
+</html>

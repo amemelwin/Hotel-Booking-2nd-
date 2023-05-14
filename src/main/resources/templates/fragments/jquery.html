@@ -11,26 +11,36 @@
 			const roomNumber = attr("room-number");
 			
 			if(lendFlag == 0){
+				const inputElement = selector($("input[name='roomId']"));
+				const oldSelectedId = inputElement().val();
 				let childDiv = selector($(`div[room-id=${roomId}] > div`));
-				childDiv("css","background-color","#09E705");
-			}
-		});
 				
-		// 5/14/2023 		
-		const selector = (element)=>{
-			return (...props)=>{
-				if(props.length==1){
-					const [prop] = props;
-					return element.attr(prop);
-				}else if(props.length==2){
-					const [prop,value] = props;
-					element.attr(prop,value);
-				}else if(props.length==3){
-					const [css,style,value] = props;
-					element.css(style,value);
+				// Has old selected
+				if(oldSelectedId){
+					// Toggle 
+					if(oldSelectedId == roomId){
+						childDiv("css","background-color","white");
+						inputElement().val("");
+					}else{
+						// Release selected old room
+						let oldRoomElement = selector($(`div[room-id=${oldSelectedId}] > div`));
+						oldRoomElement("css","background-color","white");
+						
+						// Select New Room
+						childDiv("css","background-color","#09E745");
+						inputElement().val(roomId);
+						
+					}
+					
+				}else{
+					childDiv("css","background-color","#09E745");
+					inputElement().val(roomId);
 				}
-			};
-		}
+				
+			}
+			
+			
+		});				
 		
 	});
 </script> 	

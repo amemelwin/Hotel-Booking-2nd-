@@ -9,6 +9,12 @@
 		<result property="bookingId" column="booking_id"/>
 	</resultMap>
 	
+	<resultMap id="userResult" type="com.booking.room.entity.User">
+		<id property="id" column="id"></id>
+		<result property="username" column="username"/>
+		<result property="email" column="email"/>		
+	</resultMap>
+	
 	<select id="getRoomBooking" resultMap="roomBookingResult">
 		SELECT
 		r.id,r.room_number,r.lend_flag,
@@ -20,4 +26,10 @@
 		GROUP BY r.id,r.room_number,r.lend_flag
 		ORDER BY r.id;
 	</select>	
+	
+	<select id="getAuthUser" resultMap="userResult">
+		SELECT id,username,email 
+		FROM users 
+		WHERE email=#{email} AND password=#{password};
+	</select>
 </mapper>
