@@ -3,21 +3,50 @@
 <head th:replace="fragments/common :: head('Hotel Booking System')"></head>
 <body>
 	<div class="py-5 bg-dark text-center text-light">Header</div>
-	<a th:href="@{/login}" th:if="${Auth == null}">Login</a>
-	<div th:if="${Auth}" th:text="${Auth.username}"></div>
+	<div class="mx-auto w-50">
+		<a th:href="@{/login}" th:if="${Auth == null}">Login</a>
+		<div th:if="${Auth}" th:text="${Auth.username}"></div>
+	</div>
 	<div class="mx-auto w-50 ">
 		<div class="row">
-			<div th:each="room:${rooms}" th:object="${room}" class="col-3 p-3 room" th:room-id="*{id}" th:lend-flag="*{lendFlag}" th:room-number="*{roomNumber}" >
+		
+			<div th:if="${Auth}" th:checkout="${Auth.id == room.userId}?'1':'0'" th:each="room:${rooms}" th:object="${room}" class="col-3 p-3 room" th:room-id="*{id}" th:lend-flag="*{lendFlag}" th:room-number="*{roomNumber}" >
+				
+				<div 
+					th:if="${Auth.id == room.userId}"
+					th:text="*{roomNumber}" 
+					class="py-5 text-center border" 
+					style="border-radius:20px; user-select:none;" 
+					th:styleappend="*{lendFlag == 1}? 'background-color: #03A800; cursor: pointer;':'background-color:white;cursor:pointer;'"
+					>
+				</div>
+				
+				<div 
+					th:unless="${Auth.id == room.userId}"
+					th:text="*{roomNumber}" 
+					class="py-5 text-center border" 
+					style="border-radius:20px; user-select:none;" 
+					th:styleappend="*{lendFlag == 1}? 'background-color: #E1E1E1; cursor:not-allowed;':'background-color:white;cursor:pointer;'"
+					>
+				</div>
+				
+			</div>
+			
+			<div th:unless="${Auth}" checkout="0" th:each="room:${rooms}" th:object="${room}" class="col-3 p-3 room" th:room-id="*{id}" th:lend-flag="*{lendFlag}" th:room-number="*{roomNumber}" >
+								
 				<div 
 					th:text="*{roomNumber}" 
 					class="py-5 text-center border" 
 					style="border-radius:20px; user-select:none;" 
-					th:styleappend="*{lendFlag == 1}?'background-color:#E1E1E1; cursor:not-allowed;':'background-color:white;cursor:pointer;'"
+					th:styleappend="*{lendFlag == 1}? 'background-color: #E1E1E1; cursor:not-allowed;':'background-color:white;cursor:pointer;'"
 					>
 				</div>
+				
 			</div>
+			
 		</div>	
 	</div>
+	
 	<form th:action="@{/create/booking}" Method="POST" class=" mx-auto w-50">
 		<input name="roomId" type="hidden">
 		<button id="createBookingBtn" class="btn btn-primary mt-3 w-100" type="submit" disabled>予約</button>

@@ -15,6 +15,14 @@
 		<result property="email" column="email"/>		
 	</resultMap>
 	
+	<resultMap id="roomResult" type="com.booking.room.entity.Room">
+		<id property="id" column="id"></id>
+		<result property="roomNumber" column="room_number" />
+		<result property="lendFlag" column="lend_flag" />
+		<result property="createdAt" column="created_at" />
+		<result property="updatedAt" column="updated_at" />
+	</resultMap>
+	
 	<select id="getRoomBooking" resultMap="roomBookingResult">
 		SELECT
 		r.id,r.room_number,r.lend_flag,
@@ -32,4 +40,22 @@
 		FROM users 
 		WHERE email=#{email} AND password=#{password};
 	</select>
+	
+	<select id="getRoomByFlag" resultMap="roomResult" >
+		SELECT *
+		FROM rooms
+		WHERE id=#{roomId} AND lend_flag=#{lendFlag}
+	</select>
+	
+	<insert id="createBooking">
+		INSERT INTO booking(date,room_id,user_id)
+		VALUES (now(),#{roomId},#{userId})
+	</insert>
+	
+	<update id="updateRoom">
+		UPDATE rooms
+		SET lend_flag=#{lendFlag}
+		WHERE id=#{roomId}
+	</update>
+	
 </mapper>

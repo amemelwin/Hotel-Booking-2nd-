@@ -1,12 +1,14 @@
 package com.booking.room.entity;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
-public class RoomBooking {
+public class Room {
 	private int id;
 	private String roomNumber;
 	private int lendFlag;
-	private int userId;
-	private int bookingId;
+	private Date createdAt;
+	private Date updatedAt;
 }
