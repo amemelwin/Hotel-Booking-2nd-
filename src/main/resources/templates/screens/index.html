@@ -3,6 +3,12 @@
 <head th:replace="fragments/common :: head('Hotel Booking System')"></head>
 <body>
 	<div class="py-5 bg-dark text-center text-light">Header</div>
+	
+	<!-- Catch From Message Delivery -->
+	<input type="hidden" th:msg_title="${msg_title}"/>
+	<input type="hidden" th:msg_body="${msg_body}"/>
+	
+
 	<div class="mx-auto w-50">
 		<a th:href="@{/login}" th:if="${Auth == null}">Login</a>
 		<div th:if="${Auth}" th:text="${Auth.username}"></div>
@@ -10,7 +16,7 @@
 	<div class="mx-auto w-50 ">
 		<div class="row">
 		
-			<div th:if="${Auth}" th:checkout="${Auth.id == room.userId}?'1':'0'" th:each="room:${rooms}" th:object="${room}" class="col-3 p-3 room" th:room-id="*{id}" th:lend-flag="*{lendFlag}" th:room-number="*{roomNumber}" >
+			<div th:if="${Auth}" th:checkout="${Auth.id == room.userId}?'1':'0'" th:each="room:${rooms}" th:object="${room}" class="col-3 p-3 room" th:book-id="*{bookingId}" th:room-id="*{id}" th:lend-flag="*{lendFlag}" th:room-number="*{roomNumber}" >
 				
 				<div 
 					th:if="${Auth.id == room.userId}"
@@ -47,13 +53,18 @@
 		</div>	
 	</div>
 	
-	<form th:action="@{/create/booking}" Method="POST" class=" mx-auto w-50">
+	<form th:action="@{/booking/create}" Method="POST" class=" mx-auto w-50">
 		<input name="roomId" type="hidden">
+		<input name="roomNumber" type="hidden">
 		<button id="createBookingBtn" class="btn btn-primary mt-3 w-100" type="submit" disabled>予約</button>
 	</form>	
 		
 	<div class="my-5 py-5"></div>
 	
+	<!-- Modal -->
+	<div th:replace="fragments/common::bookCancelModal"></div>
+	
+	<!-- script -->
 	<script th:replace="fragments/jquery :: jquery"></script>
 </body>
 </html>

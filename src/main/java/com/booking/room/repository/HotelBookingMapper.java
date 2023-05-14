@@ -19,7 +19,9 @@ public interface HotelBookingMapper {
 	public Room getRoomByFlag(@Param("roomId") int roomId, @Param("lendFlag") int lendFlag);
 
 	public void createBooking(@Param("roomId") int roomId, @Param("userId") int userId);
-	
+
 	public void updateRoom(@Param("roomId") int roomId, @Param("lendFlag") int lendFlag);
+
+	public void cancelBooking(@Param("bookingId") int bookingId);
 
 }

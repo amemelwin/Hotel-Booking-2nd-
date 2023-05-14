@@ -7,6 +7,8 @@
 			const attr = selector($(this));
 			const roomId = attr("room-id");
 			const lendFlag = attr("lend-flag");
+			const checkout = attr("checkout");
+			const bookingId = attr("book-id")
 			const roomNumber = attr("room-number");
 			
 			if(lendFlag == 0){
@@ -20,6 +22,7 @@
 					if(oldSelectedId == roomId){
 						childDiv("css","background-color","white");
 						inputElement().val("");
+						$("input[name='roomNumber']").val("");
 						createBookingBtn("disabled",true);
 					}else{
 						// Release selected old room
@@ -29,17 +32,33 @@
 						// Select New Room
 						childDiv("css","background-color","#09E745");
 						inputElement().val(roomId);
+						$("input[name='roomNumber']").val(roomNumber);
 					}
 				}else{
 					childDiv("css","background-color","#09E745");
 					inputElement().val(roomId);
+					$("input[name='roomNumber']").val(roomNumber);
 					createBookingBtn("disabled",false);
 				}
 				
-			} // else if(checkout==1)
-			
-			
+			}else if(checkout==1){
+				// text injection to modal's body
+				$("#bookCancelModalBody").text(roomNumber +"の予約をキャンセルします、よろしいでしょうか？");
+				
+				// wakeup modal
+				$("#bookCancelModal").modal("show");
+				
+				// set val to modal's input field
+				$("input[name='cancelRoomId']").val(roomId);
+				$("input[name='bookingId']").val(bookingId);
+			}
 		});
+		
+		$(".bookCancelModalClose").click(function(){
+			$("#bookCancelModalBody").text("");
+			$("input[name='cancelRoomId']").val('');
+			$("#bookCancelModal").modal("hide");			
+		})
 		
 	});
 </script> 	

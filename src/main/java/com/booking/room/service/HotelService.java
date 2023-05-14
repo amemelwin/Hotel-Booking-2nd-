@@ -17,11 +17,11 @@ import com.booking.room.repository.HotelBookingMapper;
 public class HotelService {
 	@Autowired
 	HotelBookingMapper hotelBookingMapper;
-	
-	public List<RoomBooking> getRoomBooking(){
+
+	public List<RoomBooking> getRoomBooking() {
 		return this.hotelBookingMapper.getRoomBooking();
 	}
-	
+
 	public User getAuthUser(String email, String password) {
 		return this.hotelBookingMapper.getAuthUser(email, password);
 	}
@@ -29,15 +29,25 @@ public class HotelService {
 	public Room getRoomByFlag(int roomId, int lendFlag) {
 		return this.hotelBookingMapper.getRoomByFlag(roomId, lendFlag);
 	}
-	
+
 	@Transactional
-	public void createBooking( int roomId, int userId) {
-		try {			
+	public void createBooking(int roomId, int userId) {
+		try {
 			this.hotelBookingMapper.createBooking(roomId, userId);
 			this.hotelBookingMapper.updateRoom(roomId, 1);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			TransactionInterceptor.currentTransactionStatus().setRollbackOnly();
 		}
 	}
-	
+
+	@Transactional
+	public void cancelBooking(int roomId, int bookingId) {
+		try {
+			this.hotelBookingMapper.cancelBooking(bookingId);
+			this.hotelBookingMapper.updateRoom(roomId, 0);
+		} catch (Exception e) {
+			TransactionInterceptor.currentTransactionStatus().setRollbackOnly();
+		}
+	}
+
 }

@@ -58,4 +58,10 @@
 		WHERE id=#{roomId}
 	</update>
 	
+	<update id="cancelBooking">
+		UPDATE booking
+		SET deleted_at=now()
+		WHERE id=#{bookingId}
+	</update>
+	
 </mapper>
