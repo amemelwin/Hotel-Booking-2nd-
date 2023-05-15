@@ -1,15 +1,11 @@
 package com.booking.room.controller;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.booking.room.entity.Room;
 import com.booking.room.entity.User;
@@ -49,6 +45,7 @@ public class HotelController {
 		Room bookRoom = this.hotelService.getRoomByFlag(bookingForm.getRoomId(), 0);
 		if (bookRoom == null) {
 			// error msg
+			session.setAttribute("message", new AlertModal("データ不整合エラー!", "申し訳ございません。予約をできませんでした！"));
 		} else {
 			this.hotelService.createBooking(bookingForm.getRoomId(), authUser.getId());
 			session.setAttribute("message", new AlertModal("ありがとう!", bookingForm.getRoomNumber()+" を予約しました."));

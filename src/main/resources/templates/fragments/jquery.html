@@ -3,6 +3,16 @@
 
 <script th:fragment="jquery">
 	$(document).ready(function(){
+		
+		// Catch Message  
+		let title = $("input[name='msg_title']").attr("msg_title");
+		let body = $("input[name='msg_body']").attr("msg_body");
+		if(title && body){
+			$("#errorModalTitle").text(title);
+			$("#errorModalBody").text(body);
+			$("#errorModal").modal("show");
+		}
+		
 		$(".room").click(function(){
 			const attr = selector($(this));
 			const roomId = attr("room-id");
@@ -54,10 +64,18 @@
 			}
 		});
 		
+		// Model close Handler
+		
 		$(".bookCancelModalClose").click(function(){
 			$("#bookCancelModalBody").text("");
 			$("input[name='cancelRoomId']").val('');
 			$("#bookCancelModal").modal("hide");			
+		})
+		
+		$(".errorModalClose").click(function(){
+			$("#errorModalTitle").text("");
+			$("#errorModalBody").text("");
+			$("#errorModal").modal("hide");
 		})
 		
 	});

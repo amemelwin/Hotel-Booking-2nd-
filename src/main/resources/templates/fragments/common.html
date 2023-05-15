@@ -35,6 +35,8 @@
  	</div>
  	
  	<!-- Modal -->
+ 	
+ 	<!-- Booking Cancel Modal -->
  	<div th:fragment="bookCancelModal" class="modal fade" id="bookCancelModal" tabindex="-1" role="dialog" aria-labelledby="bookCancelModal" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered "  role="document">
 	    <div class="modal-content" style="border-radius:20px">
@@ -52,6 +54,27 @@
 	      		<input name="bookingId" type="hidden">
 	        	<button type="submit" class="btn btn-primary px-5" style="border-radius: 10px;" data-dismiss="modal">OK</button>
 	      </form>
+	    </div>
+	  </div>
+	</div>
+	
+	<!-- Error Modal -->
+	<div th:fragment="errorModal" class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModal" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered "  role="document">
+	    <div class="modal-content" style="border-radius:20px">
+	      <div class="modal-header d-flex flex-row justify-content-between">
+	        <div class="modal-title text-center h4 col-11">
+	        	<div  id="errorModalTitle">
+	        		<!-- Title injection here -->
+	        	</div>
+	        </div>
+	       	<div class="col-1">
+		       	<div class="errorModalClose" style="cursor:pointer;"><i class="bi bi-x h1" ></i></div>
+	       	</div>
+	      </div>
+	      <div class="modal-body text-center my-3" id="errorModalBody">
+	        <!-- Error Msg injection here -->
+	      </div>
 	    </div>
 	  </div>
 	</div>

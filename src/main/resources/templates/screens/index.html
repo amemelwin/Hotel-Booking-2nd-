@@ -5,9 +5,8 @@
 	<div class="py-5 bg-dark text-center text-light">Header</div>
 	
 	<!-- Catch From Message Delivery -->
-	<input type="hidden" th:msg_title="${msg_title}"/>
-	<input type="hidden" th:msg_body="${msg_body}"/>
-	
+	<input type="hidden" name="msg_title" th:msg_title="${msg_title}"/>
+	<input type="hidden" name="msg_body" th:msg_body="${msg_body}"/>
 
 	<div class="mx-auto w-50">
 		<a th:href="@{/login}" th:if="${Auth == null}">Login</a>
@@ -63,6 +62,7 @@
 	
 	<!-- Modal -->
 	<div th:replace="fragments/common::bookCancelModal"></div>
+	<div th:replace="fragments/common::errorModal"></div>
 	
 	<!-- script -->
 	<script th:replace="fragments/jquery :: jquery"></script>
