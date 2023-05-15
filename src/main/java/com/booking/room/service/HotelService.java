@@ -2,7 +2,6 @@ package com.booking.room.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +10,7 @@ import org.springframework.transaction.interceptor.TransactionInterceptor;
 import com.booking.room.entity.Room;
 import com.booking.room.entity.RoomBooking;
 import com.booking.room.entity.User;
+import com.booking.room.form.SignupForm;
 import com.booking.room.repository.HotelBookingMapper;
 
 @Service
@@ -28,6 +28,16 @@ public class HotelService {
 
 	public Room getRoomByFlag(int roomId, int lendFlag) {
 		return this.hotelBookingMapper.getRoomByFlag(roomId, lendFlag);
+	}
+	
+	public RoomBooking getBookingById(int bookingId) {
+		return this.hotelBookingMapper.getBookingById(bookingId);
+		
+	}
+	
+	public void createUser(SignupForm signUpForm) {
+		this.hotelBookingMapper.createUser(signUpForm);
+		
 	}
 
 	@Transactional

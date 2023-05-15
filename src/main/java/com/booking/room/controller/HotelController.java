@@ -8,12 +8,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.booking.room.entity.Room;
+import com.booking.room.entity.RoomBooking;
 import com.booking.room.entity.User;
 import com.booking.room.form.CancelBookingForm;
 import com.booking.room.form.CreateBookingForm;
 import com.booking.room.model.AlertModal;
 import com.booking.room.service.HotelCommonService;
 import com.booking.room.service.HotelService;
+import com.booking.room.form.LoginForm;
+import com.booking.room.form.SignupForm;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -63,25 +66,49 @@ public class HotelController {
 		
 		// checkOutRoom
 		Room bookRoom = this.hotelService.getRoomByFlag(cancelBookingForm.getCancelRoomId(), 1);
-		if (bookRoom == null) {
+		RoomBooking booking = this.hotelService.getBookingById(cancelBookingForm.getBookingId());
+
+		if (bookRoom == null || booking == null) {
 			// error msg
+			System.out.println(bookRoom);
+			System.out.println(booking);
+			session.setAttribute("message", new AlertModal("データ不整合エラー!", "申し訳ございません。予約キャンセルをできませんでした！"));
 		} else {
-			System.out.println(cancelBookingForm.getBookingId());
 			this.hotelService.cancelBooking(cancelBookingForm.getCancelRoomId(), cancelBookingForm.getBookingId());
+			session.setAttribute("message", new AlertModal("ありがとう!","Booking Room をキャンセルしました."));
 		}
 		
 		return "redirect:/";
 	}
-
+ 
+//	if (this.commonHelper.checkAuth(session) == null) {
+//		LoginForm newForm = new LoginForm();
+//		newForm.setEmail((String) session.getAttribute("email"));
+//		session.removeAttribute("email");
+//		model.addAttribute("loginForm", newForm);
 	@GetMapping("/login")
-	public String login() {
+	public String login(Model model) {
+		LoginForm newForm = new LoginForm();
+		model.addAttribute("loginForm",newForm);
 		return "screens/login";
 	}
 
 	@PostMapping("/login")
 	public String login(Model model, HttpSession session) {
-		System.out.println("Post mapp");
 		session.setAttribute("Auth", this.hotelService.getAuthUser("mrs.amie@gmail.com", "123456"));
+		return "redirect:/";
+	}
+	
+	@GetMapping("/signup")
+	public String signup(Model model) {
+		SignupForm form = new SignupForm();
+		model.addAttribute("signUpForm",form);
+		return "screens/signup";
+	}
+	
+	@PostMapping("/signup")
+	public String signup(@ModelAttribute SignupForm signUpForm,HttpSession session) {
+		this.hotelService.createUser(signUpForm);
 		return "redirect:/";
 	}
 

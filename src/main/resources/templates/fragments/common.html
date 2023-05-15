@@ -22,9 +22,17 @@
 </head>
 <body>
  	<!-- Header -->
- 	<div th:fragment="header(title)" class="text-center py-4 bg-dark text-light mb-5" >
- 		<div th:text="${title}"></div>
- 	</div>
+ 	<div th:fragment="header(Auth)" class="py-3" style="background-color:#E2F0FF">
+		<div class="mx-auto w-50 d-flex flex-row justify-content-between text-light ">
+			<div class="h4 text-dark">部屋の予約</div>
+			<div class="d-flex flex-row ">
+				<a href="" class="text-decoration-none mx-5 ">部屋一覧</a>
+				<div th:if="${Auth}" class="text-dark" th:text="${Auth.username}"></div>
+				<a th:if="${param.query != 'http://localhost:8080/login'}" th:href="@{/login}" th:unless="${Auth}" class="text-decoration-none text-dark" style="cursor:pointer">ログイン</a>
+				<a th:if="${Auth}"  th:href="@{/}" class="text-decoration-none mx-2">Log Out</a>
+			</div>
+		</div>
+	</div>
  	
  	<!-- Footer -->
  	<div th:fragment="footer(left,right)" class="py-3 bg-dark text-light" style="position: fixed; bottom: 0; width: 100%">
@@ -35,6 +43,10 @@
  	</div>
  	
  	<!-- Modal -->
+ 	
+ 	<!-- Catch From Message Delivery -->
+	<input type="hidden" name="msg_title" th:msg_title="${msg_title}"/>
+	<input type="hidden" name="msg_body" th:msg_body="${msg_body}"/>
  	
  	<!-- Booking Cancel Modal -->
  	<div th:fragment="bookCancelModal" class="modal fade" id="bookCancelModal" tabindex="-1" role="dialog" aria-labelledby="bookCancelModal" aria-hidden="true">
@@ -50,9 +62,9 @@
 	        <!-- Error Msg injection here -->
 	      </div>
 	      <form th:action="@{/booking/cancel}" method="post" class="modal-footer d-flex flex-row justify-content-center">
-	      		<input name="cancelRoomId" type="hidden">
-	      		<input name="bookingId" type="hidden">
-	        	<button type="submit" class="btn btn-primary px-5" style="border-radius: 10px;" data-dismiss="modal">OK</button>
+	      	<input name="cancelRoomId" type="hidden">
+	      	<input name="bookingId" type="hidden">
+	        <button type="submit" class="btn btn-primary px-5" style="border-radius: 10px;" data-dismiss="modal">OK</button>
 	      </form>
 	    </div>
 	  </div>

@@ -1,4 +1,4 @@
-package com.booking.room.entity;
+ package com.booking.room.entity;
 
 import java.util.Date;
 

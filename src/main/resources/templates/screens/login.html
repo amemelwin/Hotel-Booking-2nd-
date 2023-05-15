@@ -2,13 +2,24 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/common :: head('Hotel Booking System')"></head>
 <body>
-	<div class="py-5 bg-dark text-center text-light">Header</div>
-	
-	<form th:action="@{/login}" Method="Post" class="mx-auto w-50">
-		<button type="submit">
-			Login
-		</button>
-	</form>
+	<div th:replace="fragments/common :: header(Auth=${Auth})"></div>
+	 <div class="mx-auto w-50 my-5 py-3 text-center " style="border-radius: 10px 10px 0 0;background-color:#E5E4E2" >
+ 	 	ログイン
+ 	 </div>
+ 	 <div class="mx-auto w-50 border "  style="border-radius:0 0 10px 10px ;" >
+	   	<form th:action="@{/login}" method="post" class="py-3 px-5" th:object="${loginForm}">
+		  <div class="form-group">
+		    <label for="email" class="pb-2">メール</label>
+		    <input type="email" class="form-control py-2" th:field="*{email}" id="email" aria-describedby="emailHelp" style="border-radius:10px;" >
+		  </div>
+		  <div class="form-group my-4">
+		    <label for="password" class="py-2">パスワード</label>
+		    <input type="password" class="form-control py-2" th:field="*{password}" id="password" style="border-radius:10px;">
+		  </div>
+		  <button type="submit" class="btn btn-primary py-2 my-5 d-flex flex-row col-sm-12 justify-content-center" style="border-radius:10px;"> ログイン</button>	
+  		  <a th:href="@{/signup}" class=" d-flex flex-row col-sm-12 justify-content-center mb-4" style="cursor:pointer;"> アカウント登録</a>			 
+ 		</form>
+ 	</div>
 		
 	<div class="my-5 py-5"></div>
 	

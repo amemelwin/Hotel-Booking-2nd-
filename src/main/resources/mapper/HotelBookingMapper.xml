@@ -47,9 +47,20 @@
 		WHERE id=#{roomId} AND lend_flag=#{lendFlag}
 	</select>
 	
+	<select id="getBookingById" resultMap="roomBookingResult" >
+		SELECT *
+		FROM booking
+		WHERE id=#{bookingId};
+	</select>
+	
 	<insert id="createBooking">
 		INSERT INTO booking(date,room_id,user_id)
 		VALUES (now(),#{roomId},#{userId})
+	</insert>
+	
+	<insert id="createUser">
+		INSERT INTO users(username,email,password)
+		VALUES (#{username},#{email},#{password})
 	</insert>
 	
 	<update id="updateRoom">

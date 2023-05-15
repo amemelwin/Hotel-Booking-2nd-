@@ -2,16 +2,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/common :: head('Hotel Booking System')"></head>
 <body>
-	<div class="py-5 bg-dark text-center text-light">Header</div>
-	
+	<div th:replace="fragments/common :: header(Auth=${Auth})"></div>	
 	<!-- Catch From Message Delivery -->
 	<input type="hidden" name="msg_title" th:msg_title="${msg_title}"/>
 	<input type="hidden" name="msg_body" th:msg_body="${msg_body}"/>
 
-	<div class="mx-auto w-50">
-		<a th:href="@{/login}" th:if="${Auth == null}">Login</a>
-		<div th:if="${Auth}" th:text="${Auth.username}"></div>
-	</div>
+	
+	<div class="mx-auto w-50 ">部屋一覧</div>
 	<div class="mx-auto w-50 ">
 		<div class="row">
 		
@@ -37,7 +34,7 @@
 				
 			</div>
 			
-			<div th:unless="${Auth}" checkout="0" th:each="room:${rooms}" th:object="${room}" class="col-3 p-3 room" th:room-id="*{id}" th:lend-flag="*{lendFlag}" th:room-number="*{roomNumber}" >
+			<div th:unless="${Auth}" th:checkout="0" th:each="room:${rooms}" th:object="${room}" class="col-3 p-3 room" th:room-id="*{id}" th:lend-flag="*{lendFlag}" th:room-number="*{roomNumber}" >
 								
 				<div 
 					th:text="*{roomNumber}" 
@@ -56,7 +53,9 @@
 		<input name="roomId" type="hidden">
 		<input name="roomNumber" type="hidden">
 		<button id="createBookingBtn" class="btn btn-primary mt-3 w-100" type="submit" disabled>予約</button>
-	</form>	
+	</form>
+	
+	
 		
 	<div class="my-5 py-5"></div>
 	
