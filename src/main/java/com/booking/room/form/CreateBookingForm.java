@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class CreateBookingForm {
-	private int roomId;
+	private String roomId;
 	private String roomNumber;
 }

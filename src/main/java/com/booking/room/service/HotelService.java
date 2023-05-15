@@ -29,15 +29,15 @@ public class HotelService {
 	public Room getRoomByFlag(int roomId, int lendFlag) {
 		return this.hotelBookingMapper.getRoomByFlag(roomId, lendFlag);
 	}
-	
+
 	public RoomBooking getBookingById(int bookingId) {
 		return this.hotelBookingMapper.getBookingById(bookingId);
-		
+
 	}
-	
+
 	public void createUser(SignupForm signUpForm) {
 		this.hotelBookingMapper.createUser(signUpForm);
-		
+
 	}
 
 	@Transactional
@@ -58,6 +58,11 @@ public class HotelService {
 		} catch (Exception e) {
 			TransactionInterceptor.currentTransactionStatus().setRollbackOnly();
 		}
+	}
+
+	public int checkOutRoom(int roomId, int bookingId, int userId) {
+		return this.hotelBookingMapper.checkOutRoom(roomId, bookingId, userId);
+
 	}
 
 }

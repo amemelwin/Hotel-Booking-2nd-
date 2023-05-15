@@ -23,6 +23,17 @@
 		<result property="updatedAt" column="updated_at" />
 	</resultMap>
 	
+	<!-- Check Out Room Consistency -->
+	<select id="checkOutRoom" resultType="int">
+		SELECT count(*) FROM rooms, booking
+		WHERE
+		rooms.id=#{roomId} AND
+		booking.id=#{bookingId} AND
+		booking.room_id=#{roomId} AND
+		booking.user_id=#{userId} AND
+		booking.deleted_at IS NULL
+	</select>
+	
 	<select id="getRoomBooking" resultMap="roomBookingResult">
 		SELECT
 		r.id,r.room_number,r.lend_flag,

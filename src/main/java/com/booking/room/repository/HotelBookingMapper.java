@@ -29,5 +29,7 @@ public interface HotelBookingMapper {
 
 	public void cancelBooking(@Param("bookingId") int bookingId);
 	
+	public int checkOutRoom(@Param("roomId") int roomId,@Param("bookingId") int bookingId,@Param("userId") int userId);
+	
 
 }

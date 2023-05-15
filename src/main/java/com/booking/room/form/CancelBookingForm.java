@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class CancelBookingForm {
-	private int cancelRoomId;
-	private int bookingId;
+	private String cancelRoomId;
+	private String bookingId;
 }
