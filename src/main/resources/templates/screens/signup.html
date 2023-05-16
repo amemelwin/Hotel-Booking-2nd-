@@ -8,7 +8,7 @@
  	 	アカウント登録
  	 </div> 	
  	<div class="mx-auto w-50 border "  style="border-radius:0 0 10px 10px ;" >
-	   	<form th:action="@{/signup}" class="py-3 px-5" th:object="${signUpForm}" method="POST">
+	   	<form th:action="@{/signup}" class="py-3 px-5"  th:object="${signUpForm}" method="POST">
 		  <div class="form-group my-4" >
 		    <label for="name" class="pb-2">氏名</label>
 		    <input th:field="*{username}" type="text" class="form-control py-2"  id="name" style="border-radius:10px;" >

@@ -1,11 +1,9 @@
 package com.booking.room.form;
 
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data
-@Valid
 public class SignupForm {
 	
 	@NotEmpty(message="username is required")
