@@ -3,6 +3,7 @@ package com.booking.room.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import com.booking.room.form.LoginForm;
 import com.booking.room.form.SignupForm;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 public class HotelController {
@@ -94,7 +96,7 @@ public class HotelController {
 
 	@PostMapping("/login")
 	public String login(Model model, HttpSession session) {
-		//session.setAttribute("Auth", this.hotelService.getAuthUser("mrs.amie@gmail.com", "123456"));
+		session.setAttribute("Auth", this.hotelService.getAuthUser("mrs.amie@gmail.com", "123456"));
 		return "redirect:/";
 	}
 
@@ -106,7 +108,17 @@ public class HotelController {
 	}
 
 	@PostMapping("/signup")
-	public String signup(@ModelAttribute SignupForm signUpForm, HttpSession session) {
+	public String signup(@Valid @ModelAttribute SignupForm signUpForm, HttpSession session,BindingResult result,Model model) {
+		if(result.hasErrors()){
+			return "screens/signup";
+		}
+		// check password and confirm password
+		if (!signUpForm.getConfirmPassword().equals(signUpForm.getPassword())) {
+			model.addAttribute("confirm_error", "The password and confirmation password do not match.");
+			return "screen/signup";
+		}
+		
+
 		this.hotelService.createUser(signUpForm);
 		return "redirect:/";
 	}
