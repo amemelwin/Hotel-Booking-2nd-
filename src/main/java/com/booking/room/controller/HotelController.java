@@ -1,5 +1,7 @@
 package com.booking.room.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -108,9 +110,10 @@ public class HotelController {
 	}
 
 	@PostMapping("/signup")
-	public String signup(@Valid @ModelAttribute SignupForm signUpForm,BindingResult result,Model model, HttpSession session) {
+	public String signup(@Valid @ModelAttribute SignupForm signUpForm,BindingResult result,Model model, HttpSession session) throws IOException  {
 		if(result.hasErrors()){
-			System.out.println("Error occur");
+			System.out.println("There was a error "+result);
+	        System.out.println("Person is: "+ signUpForm.getUsername());
 			return "screens/signup";
 		}
 		// check password and confirm password
