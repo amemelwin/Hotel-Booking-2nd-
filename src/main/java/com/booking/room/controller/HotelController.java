@@ -108,18 +108,19 @@ public class HotelController {
 	}
 
 	@PostMapping("/signup")
-	public String signup(@Valid @ModelAttribute SignupForm signUpForm, HttpSession session,BindingResult result,Model model) {
+	public String signup(@Valid @ModelAttribute SignupForm signUpForm,BindingResult result,Model model, HttpSession session) {
 		if(result.hasErrors()){
+			System.out.println("Error occur");
 			return "screens/signup";
 		}
 		// check password and confirm password
-		if (!signUpForm.getConfirmPassword().equals(signUpForm.getPassword())) {
-			model.addAttribute("confirm_error", "The password and confirmation password do not match.");
-			return "screen/signup";
-		}
+//		if (!signUpForm.getConfirmPassword().equals(signUpForm.getPassword())) {
+//			model.addAttribute("confirm_error", "The password and confirmation password do not match.");
+//			return "screen/signup";
+//		}
 		
 
-		this.hotelService.createUser(signUpForm);
+//		this.hotelService.createUser(signUpForm);
 		return "redirect:/";
 	}
 
