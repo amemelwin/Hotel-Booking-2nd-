@@ -2,6 +2,7 @@ package com.booking.room.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,5 +65,10 @@ public class HotelService {
 		return this.hotelBookingMapper.checkOutRoom(roomId, bookingId, userId);
 
 	}
+	
+	public int checkEmail(String email) {
+		return this.hotelBookingMapper.checkEmail(email);
+	}
+
 
 }

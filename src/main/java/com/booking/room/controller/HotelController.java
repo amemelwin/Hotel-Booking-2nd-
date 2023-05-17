@@ -110,17 +110,18 @@ public class HotelController {
 	}
 
 	@PostMapping("/signup")
-	public String signup(@Valid @ModelAttribute SignupForm signUpForm,BindingResult result,Model model, HttpSession session) throws IOException  {
-		if(result.hasErrors()){
-			System.out.println("There was a error "+result);
-	        System.out.println("Person is: "+ signUpForm.getUsername());
+	public String signup(@Valid @ModelAttribute("signUpForm") SignupForm signUpForm,BindingResult result,Model model, HttpSession sesion)   {
+		boolean isPasswordSatisfy = this.commonService.isPasswordSatisfy(signUpForm.getPassword(), signUpForm.getConfirmPassword(), model);
+		if(result.hasErrors() || !isPasswordSatisfy){
+//			System.out.println("There was a error "+result);
+//	        System.out.println("Person is: "+ signUpForm.getUsername());
 			return "screens/signup";
 		}
-		// check password and confirm password
-//		if (!signUpForm.getConfirmPassword().equals(signUpForm.getPassword())) {
-//			model.addAttribute("confirm_error", "The password and confirmation password do not match.");
-//			return "screen/signup";
-//		}
+		
+		if(this.hotelService.checkEmail(signUpForm.getEmail())>0) {
+			model.addAttribute("email_error","Email already exist");
+			return "screens/signup";
+		}
 		
 
 //		this.hotelService.createUser(signUpForm);

@@ -34,11 +34,16 @@ public class HotelCommonService {
 		}		
 	}
 	
-	
-
-	
-	
-	
+	public boolean isPasswordSatisfy(String password,String confirmPassword,Model model) {
+		if(password.equals(confirmPassword)) {
+			return true;
+		}else {
+			model.addAttribute("confirm_error","Password and Confirm Password are invalid");
+			return false;
+		}
+		
+		
+	}
 	
 	
 	

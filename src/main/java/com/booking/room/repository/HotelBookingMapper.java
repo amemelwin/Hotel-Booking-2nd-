@@ -31,5 +31,5 @@ public interface HotelBookingMapper {
 	
 	public int checkOutRoom(@Param("roomId") int roomId,@Param("bookingId") int bookingId,@Param("userId") int userId);
 	
-
+	public int checkEmail(@Param("email") String email);
 }

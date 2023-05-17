@@ -86,4 +86,9 @@
 		WHERE id=#{bookingId}
 	</update>
 	
+	<select id="checkEmail" resultType="int">
+		SELECT COUNT(*) FROM users
+		WHERE email=#{email}
+	</select>
+	
 </mapper>

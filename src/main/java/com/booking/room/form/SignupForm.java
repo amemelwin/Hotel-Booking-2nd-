@@ -12,7 +12,7 @@ public class SignupForm {
 	private String email;
 	@NotEmpty(message="password is required")
 	private String password;
-	@NotEmpty(message="confirmPassword is required")
+//	@NotEmpty(message="confirmPassword is required")
 	private String confirmPassword;
 
 }
